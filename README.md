@@ -22,7 +22,9 @@ How to Run:
 TBD
 
 Game Flow:
-<img src="GitFiles/Overall Flow.jpg" width="500" />
+
+<img src="GitFiles/Overall Flow.jpg" width="700" />
+
 
 Point System Mechanism:
 TBD
