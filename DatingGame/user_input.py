@@ -1,6 +1,7 @@
 # Part 1 : Asks for user info
 import random
 import sys
+import matplotlib.pyplot as plt
 
 def choose_options(qns, options):
     option = ""
@@ -32,10 +33,12 @@ while True:
     except:
         print('invalid input')
     else:
-        if player_profile['age'] > 15:
+        if player_profile['age'] > 13:
             break
         else:
             print('You are underaged. Seek parental guidance.')
+            img = plt.imread('https://www.imda.gov.sg/-/media/Imda/Images/Content/Regulation-Licensing-and-Consultations/Content-Standards-and-classification/Classification-Rating/PG13-Rating.png?la=en&hash=FDB0D0A4021A703C98A3E791D1EA3E9494BB70A7')
+            plt.imshow(img)
             sys.exit()
 
 print(f"Hi {player_profile['name']}, let's move on to some other questions regarding your dating preferences")
