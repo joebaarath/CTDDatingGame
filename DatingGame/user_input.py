@@ -3,7 +3,7 @@ import random
 
 print('Welcome to Dating Simulator 2020')
 gender = str(input('Are you Male or Female?(M/F) : '))
-partner_gender=str(input('Are you interest in Male or Female?(M/F) : '))
+partner_gender=str(input('Are you interest in Male or Female?(M/F) : ')) 
 name = str(input("What's your name? ")) 
 age = int(input("What's your age? "))
 
@@ -11,9 +11,9 @@ age = int(input("What's your age? "))
 print(f"Hi {name}, let's move on to some other questions regarding your dating preferences")
 print("Make your choices by answering 1 or 2.")
 list_of_chosen_types=[]
-type_1 = int(input("Do you prefer your partner to be 1) atlethic or 2) artistic?  "))
+type_1 = int(input("Do you prefer your partner to be 1) athletic or 2) artistic?  "))
 if type_1==1:
-    list_of_chosen_types.append("atlethic")
+    list_of_chosen_types.append("athletic")
 elif type_1==2:
     list_of_chosen_types.append("artistic")
 
@@ -104,7 +104,8 @@ list_of_female_names = ['Melody',
                         'Isabelle',
                         'Suraya',
                         'Trishna']                      
-list_of_pickup_lines = []  # is male and female pickup lines gonna be diff or same?
+list_of_male_pickup_lines = []  # Melodee fill this in!
+list_of_female_pickup_lines = []  # Melodee fill this in!
 
 partner_1={"name":"","age":"","occupation":"","personality":""}
 partner_2={"name":"","age":"","occupation":"","personality":""}
@@ -132,7 +133,71 @@ for partner in partners:
     print("--------------------------------")
     print()
 
-
+chosen_partner_no= int(input("Please make your choice now   "))
+if chosen_partner_no==1:
+    chosen_partner=partner_1
+elif chosen_partner_no==2:
+    chosen_partner=partner_2
+elif chosen_partner_no==3:
+    chosen_partner=partner_3
 
 # Part 3: Scenario Time!
+print(f"You have chosen {chosen_partner['name']}! \n Are you ready to unlock this new journey in knowing {chosen_partner['name']}? ")
+# add time lag (press enter to continue story)
 
+print(f"You have just received your first message from  {chosen_partner['name']}! ") 
+print("Make your choices by answering 1 or 2.")
+print(f"Heyyyy {name} :)")
+
+""" list_of_questions=[[f"I am {chosen_partner['name']}! Looking forward to seeing you tommorow!"],
+                    ["So do you have any idea where we should head tomorrow?"],
+                    ["So would you like try out some food at a cafe? Or do you wanna head to the beach?"],
+                    ["Sounds good! Do you want me to pick you up from your house?"]]
+                    
+list_of_ans=[["Me too~", "Yes of course! Always excited to meet new friends"],
+                ["idk ><","Anywhere that's fun sounds great!"],
+                ["Let's go to the cafe then~","Yup! I want to go to Sentosa!"],
+                ["Errr it's fine! That sounds pretty inconvenient for you! I'll see you at the beach then!","Sure! See you tomorrow!"]] """
+
+list_of_questions=[[f"I am {chosen_partner['name']}! Looking forward to seeing you tommorow!","Me too~", "Yes of course! Always excited to meet new friends"],
+                    ["So do you have any idea where we should head tomorrow?","idk ><","Anywhere that's fun sounds great!"],
+                    ["So would you like try out some food at a cafe? Or do you wanna head to the beach?","Let's go to the cafe then~","Yup! I want to go to Sentosa!"],
+                    ["Sounds good! Do you want me to pick you up from your house?","Errr it's fine! That sounds pretty inconvenient for you! I'll see you at there!","Sure! See you tomorrow!"]]
+                    
+
+score=0
+list_of_all_types = ['athletic', 
+                     'artistic', 
+                     'introvert', 
+                     'extrovert', 
+                     'adventurous', 
+                     'conservative']
+list_of_extrovert=['athletic','extrovert','adventurous']
+list_of_introvert=[ x for x in list_of_all_types if x not in list_of_extrovert]
+for x in range(0,len(list_of_questions)):
+    print(list_of_questions[x][0])
+    print("1)",list_of_questions[x][1])
+    print("2)",list_of_questions[x][2])
+    choice=int(input())
+    if chosen_partner["personality"] in list_of_introvert:
+        if choice==1:
+            score+=1
+            #print(score)
+        elif choice==2:
+            score-=1
+            #print(score)
+    elif chosen_partner["personality"] in list_of_extrovert:
+        if choice==1:
+            score-=1
+            #print(score)
+        elif choice==2:
+            score+=1
+            #print(score)
+        """ print(list_of_questions[x+][0])
+        print(list_of_questions[x][1])
+        print(list_of_questions[x][2]) """
+
+if score>-2:
+    print(f"Have fun on your date with {chosen_partner['name']} tomorrow! ")
+elif score <= -2:
+    print("Game over bro")
