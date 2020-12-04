@@ -5,24 +5,33 @@ def choose_options(qns, options):
     option = ""
     option = input(qns)
     if option not in options:
-        print(f'invalid option! options are {options}, please try again.')
+        message = f'{option} is an invalid option! options are '
+        for i in range(len(options)):
+            message += options[i]+', '
+        print( message + '\nPlease try again.')
         option = choose_options(qns, options)
     return option
-set_qns_and_answers = [['Are you Male or Female?(M/F) :', ['M','F']],
-                      ['Are you interest in Male or Female?(M/F) :', ['M','F']]]
+
 
 player_profile = {'gender':'', 'partner_gender':'', 'name':"", 'age':0}                      
-print('Welcome to Dating Simulator 2020')
+print('Welcome to Dating Simulator 2020') #prints Welcome Message
 iterable = ['gender', 'partner_gender']
-
-for i in range(2):
+set_qns_and_answers = [['Are you Male or Female?(M/F) :', ['M','F']],
+                      ['Are you interest in Male or Female?(M/F) :', ['M','F']]]
+for i in range(2): #asks basic gender info
     player_profile[iterable[i]] = choose_options(set_qns_and_answers[i][0], set_qns_and_answers[i][1])
-
 #gender = choose_options(set_qns_and_answers[0][0], set_qns_and_answers[0][1])
 #partner_gender=str(input('Are you interest in Male or Female?(M/F) : ')) 
-player_profile['name'] = str(input("What's your name? ")) 
-player_profile['age'] = int(input("What's your age? "))
-
+ 
+while True:
+    try:
+        player_profile['name'] = str(input("What's your name? "))
+        if len(player_profile['name']) == 0:
+            raise Exception
+        player_profile['age'] = int(input("What's your age? "))
+        break
+    except:
+        print('invalid input')
 
 print(f"Hi {player_profile['name']}, let's move on to some other questions regarding your dating preferences")
 print("Make your choices by answering 1 or 2.")
@@ -201,7 +210,7 @@ for x in range(0,len(list_of_questions)):
     print(list_of_questions[x][0])
     print("1)",list_of_questions[x][1])
     print("2)",list_of_questions[x][2])
-    choice=int(input())
+    choice=int(choose_options('',['1','2']))
     if chosen_partner["personality"] in list_of_introvert:
         if choice==1:
             score+=1
