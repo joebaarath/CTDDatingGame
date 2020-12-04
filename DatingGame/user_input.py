@@ -1,42 +1,64 @@
 # Part 1 : Asks for user info
 import random
 
+def choose_options(qns, options):
+    option = ""
+    option = input(qns)
+    if option not in options:
+        print(f'invalid option! options are {options}, please try again.')
+        option = choose_options(qns, options)
+    return option
+set_qns_and_answers = [['Are you Male or Female?(M/F) :', ['M','F']],
+                      ['Are you interest in Male or Female?(M/F) :', ['M','F']]]
+
+player_profile = {'gender':'', 'partner_gender':'', 'name':"", 'age':0}                      
 print('Welcome to Dating Simulator 2020')
-gender = str(input('Are you Male or Female?(M/F) : '))
-partner_gender=str(input('Are you interest in Male or Female?(M/F) : ')) 
-name = str(input("What's your name? ")) 
-age = int(input("What's your age? "))
+iterable = ['gender', 'partner_gender']
+
+for i in range(2):
+    player_profile[iterable[i]] = choose_options(set_qns_and_answers[i][0], set_qns_and_answers[i][1])
+
+#gender = choose_options(set_qns_and_answers[0][0], set_qns_and_answers[0][1])
+#partner_gender=str(input('Are you interest in Male or Female?(M/F) : ')) 
+player_profile['name'] = str(input("What's your name? ")) 
+player_profile['age'] = int(input("What's your age? "))
 
 
-print(f"Hi {name}, let's move on to some other questions regarding your dating preferences")
+print(f"Hi {player_profile['name']}, let's move on to some other questions regarding your dating preferences")
 print("Make your choices by answering 1 or 2.")
+types_qns_and_answers = [["Do you prefer your partner to be 1) athletic or 2) artistic?  ", ['1','2']],
+                         ["Do you prefer your partner to be an 1) introvert or 2) extrovert?  ", ['1','2']],
+                         ["Do you prefer your partner to be 1) adventurous or 2) conservative?  ",['1','2']]]
 list_of_chosen_types=[]
-type_1 = int(input("Do you prefer your partner to be 1) athletic or 2) artistic?  "))
-if type_1==1:
-    list_of_chosen_types.append("athletic")
-elif type_1==2:
-    list_of_chosen_types.append("artistic")
+list_of_all_types = [['athletic', 'artistic'], 
+                     ['introvert','extrovert'], 
+                     ['adventurous','conservative']]
+for i in range(3):
+     chosen_type = int(choose_options(types_qns_and_answers[i][0], types_qns_and_answers[i][1]))
+     list_of_chosen_types.append(list_of_all_types[i][chosen_type-1])
+     
+print(list_of_chosen_types)    
+# type_1 = int(input("Do you prefer your partner to be 1) athletic or 2) artistic?  "))
+# if type_1==1:
+#     list_of_chosen_types.append("athletic")
+# elif type_1==2:
+#     list_of_chosen_types.append("artistic")
 
-type_2 = int(input("Do you prefer your partner to be an 1) introvert or 2) extrovert?  "))
-if type_2==1:
-    list_of_chosen_types.append("introvert")
-elif type_2==2:
-    list_of_chosen_types.append("extrovert")
+# type_2 = int(input("Do you prefer your partner to be an 1) introvert or 2) extrovert?  "))
+# if type_2==1:
+#     list_of_chosen_types.append("introvert")
+# elif type_2==2:
+#     list_of_chosen_types.append("extrovert")
 
-type_3 = int(input("Do you prefer your partner to be 1) adventurous or 2) conservative?  "))
-if type_3==1:
-    list_of_chosen_types.append("adventurous")
-elif type_3==2:
-    list_of_chosen_types.append("conservative")
+# type_3 = int(input("Do you prefer your partner to be 1) adventurous or 2) conservative?  "))
+# if type_3==1:
+#     list_of_chosen_types.append("adventurous")
+# elif type_3==2:
+#     list_of_chosen_types.append("conservative")
 # Part 2 : Generating character profile
-list_of_all_types = ['athletic', 
-                     'artistic', 
-                     'introvert', 
-                     'extrovert', 
-                     'adventurous', 
-                     'conservative']
+
 #list_of_non_types = [x for x in list_of_all_types if x not in list_of_chosen_types]
-list_of_ages = list(range(age if age <= 21 else age - 3, age+5))
+list_of_ages = list(range(player_profile['age'] if player_profile['age'] <= 23 else player_profile['age'] - 5, player_profile['age'] +5))
 list_of_jobs = ['Accountant', 
                 'Social worker', 
                 'Computer Scientist', 
@@ -120,7 +142,7 @@ partners=[partner_1,partner_2, partner_3]
 for partner in partners:
     partner["occupation"] = random.choice(list_of_jobs)
     partner["age"] = random.choice(list_of_ages)
-    partner["name"] = random.choice(list_of_male_names if partner_gender.upper() == 'M' else list_of_female_names)
+    partner["name"] = random.choice(list_of_male_names if player_profile['partner_gender'] == 'M' else list_of_female_names)
     personality_type=random.choice(list_of_chosen_types)
     partner["personality"] = personality_type
     list_of_chosen_types.remove(personality_type)
@@ -147,7 +169,7 @@ print(f"You have chosen {chosen_partner['name']}! \n Are you ready to unlock thi
 
 print(f"You have just received your first message from  {chosen_partner['name']}! ") 
 print("Make your choices by answering 1 or 2.")
-print(f"Heyyyy {name} :)")
+print(f"Heyyyy {player_profile['name']} :)")
 
 """ list_of_questions=[[f"I am {chosen_partner['name']}! Looking forward to seeing you tommorow!"],
                     ["So do you have any idea where we should head tomorrow?"],
