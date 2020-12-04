@@ -1,20 +1,33 @@
 # Part 1 : Asks for user info
 import random
 
-
 print('Welcome to Dating Simulator 2020')
 gender = str(input('Are you Male or Female?(M/F) : '))
 partner_gender=str(input('Are you interest in Male or Female?(M/F) : '))
 name = str(input("What's your name? ")) 
 age = int(input("What's your age? "))
-print(f"Hi {name}, let's move on to some other question regarding your dating preferences")
 
-type_1 = input("Do you prefer your partner to be atlethic or artistic? : ")
-if type_1=="atlethic" or type_1=="artistic":
-    type_2 = input("Do you prefer your partner to be an introvert or extrovert? : ")
-    if type_2=="introvert" or type_2=="extrovert":
-        type_3 = input("Do you prefer your partner to be adventurous or conservative? : ")
 
+print(f"Hi {name}, let's move on to some other questions regarding your dating preferences")
+print("Make your choices by answering 1 or 2.")
+list_of_chosen_types=[]
+type_1 = int(input("Do you prefer your partner to be 1) atlethic or 2) artistic?  "))
+if type_1==1:
+    list_of_chosen_types.append("atlethic")
+elif type_1==2:
+    list_of_chosen_types.append("artistic")
+
+type_2 = int(input("Do you prefer your partner to be an 1) introvert or 2) extrovert?  "))
+if type_2==1:
+    list_of_chosen_types.append("introvert")
+elif type_2==2:
+    list_of_chosen_types.append("extrovert")
+
+type_3 = int(input("Do you prefer your partner to be 1) adventurous or 2) conservative?  "))
+if type_3==1:
+    list_of_chosen_types.append("adventurous")
+elif type_3==2:
+    list_of_chosen_types.append("conservative")
 # Part 2 : Generating character profile
 list_of_all_types = ['athletic', 
                      'artistic', 
@@ -22,9 +35,8 @@ list_of_all_types = ['athletic',
                      'extrovert', 
                      'adventurous', 
                      'conservative']
-list_of_chosen_types = [type_1, type_2, type_3]
 #list_of_non_types = [x for x in list_of_all_types if x not in list_of_chosen_types]
-list_of_ages = list(range(age if age <= 21 else age - 3, age+10))
+list_of_ages = list(range(age if age <= 21 else age - 3, age+5))
 list_of_jobs = ['Accountant', 
                 'Social worker', 
                 'Computer Scientist', 
@@ -36,8 +48,12 @@ list_of_jobs = ['Accountant',
                 'Doctor', 
                 'Nurse', 
                 'Cafe Owner', 
-                'Self-Employed', 
-                'Dentist']
+                'Model', 
+                'Dentist',
+                "Interior Designer",
+                "Engineer",
+                "Influencer",
+                "Freelance Photographer"]
 list_of_male_names = ['Justin', 
                       'Xavier', 
                       'Damien',
@@ -115,7 +131,7 @@ for partner in partners:
         print(f"{key:<15}  {value}")
     print("--------------------------------")
     print()
-#print(f'{x:02} {x*x:3} {x*x*x:4}')
+
 
 
 # Part 3: Scenario Time!
