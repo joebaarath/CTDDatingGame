@@ -1,5 +1,6 @@
 # Part 1 : Asks for user info
 import random
+import sys
 
 def choose_options(qns, options):
     option = ""
@@ -15,23 +16,27 @@ def choose_options(qns, options):
 
 player_profile = {'gender':'', 'partner_gender':'', 'name':"", 'age':0}                      
 print('Welcome to Dating Simulator 2020') #prints Welcome Message
-iterable = ['gender', 'partner_gender']
 set_qns_and_answers = [['Are you Male or Female?(M/F) :', ['M','F']],
                       ['Are you interest in Male or Female?(M/F) :', ['M','F']]]
-for i in range(2): #asks basic gender info
-    player_profile[iterable[i]] = choose_options(set_qns_and_answers[i][0], set_qns_and_answers[i][1])
+for i, value in enumerate(['gender', 'partner_gender']): #asks basic gender info
+    player_profile[value] = choose_options(set_qns_and_answers[i][0], set_qns_and_answers[i][1])
 #gender = choose_options(set_qns_and_answers[0][0], set_qns_and_answers[0][1])
 #partner_gender=str(input('Are you interest in Male or Female?(M/F) : ')) 
  
 while True:
     try:
         player_profile['name'] = str(input("What's your name? "))
-        if len(player_profile['name']) == 0:
+        if len(player_profile['name']) == 0 or player_profile['name'].isnumeric() :
             raise Exception
         player_profile['age'] = int(input("What's your age? "))
-        break
     except:
         print('invalid input')
+    else:
+        if player_profile['age'] > 15:
+            break
+        else:
+            print('You are underaged. Seek parental guidance.')
+            sys.exit()
 
 print(f"Hi {player_profile['name']}, let's move on to some other questions regarding your dating preferences")
 print("Make your choices by answering 1 or 2.")
@@ -174,7 +179,7 @@ chosen_partner = partners[chosen_partner_no-1]
 #     chosen_partner=partner_3
 
 # Part 3: Scenario Time!
-print(f"You have chosen {chosen_partner['name']}! \n Are you ready to unlock this new journey in knowing {chosen_partner['name']}? ")
+print(f"You have chosen {chosen_partner['name']}! \nAre you ready to unlock this new journey in knowing {chosen_partner['name']}? ")
 # add time lag (press enter to continue story)
 
 print(f"You have just received your first message from  {chosen_partner['name']}! ") 
