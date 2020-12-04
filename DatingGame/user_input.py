@@ -37,7 +37,7 @@ for i in range(3):
      chosen_type = int(choose_options(types_qns_and_answers[i][0], types_qns_and_answers[i][1]))
      list_of_chosen_types.append(list_of_all_types[i][chosen_type-1])
      
-print(list_of_chosen_types)    
+   
 # type_1 = int(input("Do you prefer your partner to be 1) athletic or 2) artistic?  "))
 # if type_1==1:
 #     list_of_chosen_types.append("athletic")
@@ -154,14 +154,15 @@ for partner in partners:
         print(f"{key:<15}  {value}")
     print("--------------------------------")
     print()
-
-chosen_partner_no= int(input("Please make your choice now   "))
-if chosen_partner_no==1:
-    chosen_partner=partner_1
-elif chosen_partner_no==2:
-    chosen_partner=partner_2
-elif chosen_partner_no==3:
-    chosen_partner=partner_3
+partner_choices = [["Please make your choice now   ",['1','2','3']]]
+chosen_partner_no= int(choose_options(partner_choices[0][0], partner_choices[0][1]))
+chosen_partner = partners[chosen_partner_no-1]
+# if chosen_partner_no==1:
+#     chosen_partner=partner_1
+# elif chosen_partner_no==2:
+#     chosen_partner=partner_2
+# elif chosen_partner_no==3:
+#     chosen_partner=partner_3
 
 # Part 3: Scenario Time!
 print(f"You have chosen {chosen_partner['name']}! \n Are you ready to unlock this new journey in knowing {chosen_partner['name']}? ")
