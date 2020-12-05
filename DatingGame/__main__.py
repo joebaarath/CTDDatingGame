@@ -34,13 +34,13 @@ def choose_options(qns_and_options):
         option = choose_options(qns_and_options)
     return option
 
-def randomizePartners(current_player: player(), game_config: data_config() , numOfPartners: int() = 3 ):
+def randomize_partners(current_player: player(), game_config: data_config() , num_of_partners: int() = 3 ):
     list_of_ages = list(range(current_player.age if current_player.age <= 23 else current_player.age - 5, current_player.age +5))
 
     temp_player_preferred_partner_types = current_player.preferred_partner_types[:]
     partners = []
 
-    for index in range(numOfPartners):
+    for index in range(num_of_partners):
         p = partner()
         p.age = random.choice(list_of_ages)
         p.occupation = random.choice(game_config.list_of_jobs)
@@ -102,7 +102,7 @@ def main():
 
     print('Now let introduce your 3 partners')
     print("--------------------------------")
-    partners= randomizePartners(current_player, game_config , 3)
+    partners= randomize_partners(current_player, game_config , 3)
     partner_no=1
 
     for p in partners:
