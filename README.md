@@ -23,7 +23,7 @@ TBD
 
 Game Flow:
 
-<img src="GitFiles/Overall Flow.jpg" width="700" />
+<img src="GitFiles/Game Flow.png" width="700" />
 
 
 Point System Mechanism:
