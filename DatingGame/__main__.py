@@ -181,7 +181,7 @@ def main():
         plt.imshow(img)
     elif score <= -2:
         print("Game over bro")
-        img = plt.imread('https://upload.wikimedia.org/wikipedia/commons/thumb/7/70/Broken_Heart_symbol.svg/200px-Broken_Heart_symbol.svg.png')
+        img = plt.imread('https://upload.wikimedia.org/wikipedia/commons/thumb/b/bb/Broken_heart.svg/166px-Broken_heart.svg.png')
         plt.imshow(img)
 
 if __name__ == '__main__':
