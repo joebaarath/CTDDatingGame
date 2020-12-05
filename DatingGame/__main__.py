@@ -52,6 +52,13 @@ def randomizePartners(current_player: player(), game_config: data_config() , num
 
     return partners
 
+def end_game():
+    end_game_option = choose_options(['Do you want to 1)restart or 2)exit the game? :', ['1','2']])
+    if  end_game_option == '1':
+        main()
+    else:
+        sys.exit()
+
 def main():    
     #Creates a new game settings class object
     game_config = data_config()
@@ -76,7 +83,8 @@ def main():
                 print('You are underaged. Seek parental guidance.')
                 img = plt.imread('https://www.imda.gov.sg/-/media/Imda/Images/Content/Regulation-Licensing-and-Consultations/Content-Standards-and-classification/Classification-Rating/PG13-Rating.png?la=en&hash=FDB0D0A4021A703C98A3E791D1EA3E9494BB70A7')
                 plt.imshow(img)
-                sys.exit()
+                plt.show()
+                end_game()
 
     print(f"Hi {current_player.name}, let's move on to some other questions regarding your dating preferences")
     print("Make your choices by answering 1 or 2.")
@@ -179,11 +187,14 @@ def main():
         print(f"Have fun on your date with {chosen_partner.name} tomorrow! ")
         img = plt.imread('https://upload.wikimedia.org/wikipedia/commons/e/e6/Finger_heart.png')
         plt.imshow(img)
+      
     elif score <= -2:
         print("Game over bro")
         img = plt.imread('https://upload.wikimedia.org/wikipedia/commons/thumb/b/bb/Broken_heart.svg/166px-Broken_heart.svg.png')
         plt.imshow(img)
-
+        
+    end_game()
+    
 if __name__ == '__main__':
     # execute only if run as the entry point into the program
     main()
