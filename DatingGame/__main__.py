@@ -2,103 +2,7 @@ import random
 import sys
 import matplotlib.pyplot as plt
 from data_config import *
-import json
-from types import SimpleNamespace
-
-class player():
-    def __init__(self):
-        self.name = ""
-        self.gender = ""
-        self.age = 0
-        self.partner_gender = ""
-        self.preferred_partner_types = []
-        self.score = 0
-
-class partner():
-    def __init__(self):
-        self.name = ""
-        self.gender = ""
-        self.age = 0
-        self.occupation = ""
-        self.personality_types = []
-
-
-class JsonConvert(object):
-    mappings = {}
-     
-    @classmethod
-    def class_mapper(clsself, d):
-        for keys, cls in clsself.mappings.items():
-            if keys.issuperset(d.keys()):   # are all required arguments present?
-                return cls(**d)
-        else:
-            # Raise exception instead of silently returning None
-            raise ValueError('Unable to find a matching class for object: {!s}'.format(d))
-     
-    @classmethod
-    def complex_handler(clsself, Obj):
-        if hasattr(Obj, '__dict__'):
-            return Obj.__dict__
-        else:
-            raise TypeError('Object of type %s with value of %s is not JSON serializable' % (type(Obj), repr(Obj)))
- 
-    @classmethod
-    def register(clsself, cls):
-        clsself.mappings[frozenset(tuple([attr for attr,val in cls().__dict__.items()]))] = cls
-        return cls
- 
-    @classmethod
-    def ToJSON(clsself, obj):
-        return json.dumps(obj.__dict__, default=clsself.complex_handler, indent=4)
- 
-    @classmethod
-    def FromJSON(clsself, json_str):
-        return json.loads(json_str, object_hook=clsself.class_mapper)
-     
-    @classmethod
-    def ToFile(clsself, obj, path):
-        with open(path, 'w') as jfile:
-            jfile.writelines([clsself.ToJSON(obj)])
-        return path
- 
-    @classmethod
-    def FromFile(clsself, filepath):
-        result = None
-        with open(filepath, 'r') as jfile:
-            result = clsself.FromJSON(jfile.read())
-        return result
-
-@JsonConvert.register
-class option(object):
-    def __init__(self, id:int=None, option:str="", personality_type:str="", response_positive:str="", response_negative:str="", jump_to_mcq_id:int=None):
-        self.id = id
-        self.option = option
-        self.personality_type = personality_type
-        self.response_positive = response_positive
-        self.response_negative = response_negative
-        self.jump_to_mcq_id = jump_to_mcq_id
-        return
-
-@JsonConvert.register
-class mcq(object):
-    def __init__(self, id:int=None, question:str="", options:[option]=None):
-        self.id = id
-        self.question = question
-        self.options = [] if options is None else options
-        return
- 
-@JsonConvert.register
-class scenario(object):
-    def __init__(self, id:int=None, mcqs:[mcq]=None):
-        self.id = id
-        self.mcqs = [] if mcqs is None else mcqs
-        return
-
-@JsonConvert.register
-class story(object):
-    def __init__(self, scenarios:[scenario]=None):
-        self.scenarios = [] if scenarios is None else scenarios
-        return
+from game_class import *
 
 def choose_options(qns_and_options):
     question = qns_and_options[0]
@@ -117,16 +21,36 @@ def choose_options(qns_and_options):
 
 def randomize_partners(current_player: player(), game_config: data_config() , num_of_partners: int() = 3 ):
     list_of_ages = list(range(current_player.age if current_player.age <= 23 else current_player.age - 5, current_player.age +5))
-
-    
     partners = []
+    temp_list_of_partner_ages = []
+    temp_list_of_partner_occupations = []
+    temp_list_of_partner_names = []
 
     for index in range(num_of_partners):
         p = partner()
-        p.age = random.choice(list_of_ages)
-        p.occupation = random.choice(game_config.list_of_jobs)
+
+        #force unique age
+        random_age = random.choice(list_of_ages)
+        while random_age in temp_list_of_partner_ages:
+            random_age = random.choice(list_of_ages)
+        temp_list_of_partner_ages.append(random_age)
+        p.age = random_age
+
+        #force unique name
+        random_occupation = random.choice(game_config.list_of_jobs)
+        while random_occupation in temp_list_of_partner_occupations:
+            random_occupation = random.choice(game_config.list_of_jobs)
+        temp_list_of_partner_occupations.append(random_occupation)
+        p.occupation = random_occupation
+
+        #force unique occupation
+        random_name = random.choice(game_config.list_of_male_names if current_player.partner_gender == 'M' else game_config.list_of_female_names)
+        while random_name in temp_list_of_partner_names:
+            random_name = random.choice(game_config.list_of_male_names if current_player.partner_gender == 'M' else game_config.list_of_female_names)
+        temp_list_of_partner_names.append(random_name)
+        p.name = random_name
+
         p.gender = current_player.partner_gender
-        p.name = random.choice(game_config.list_of_male_names if current_player.partner_gender == 'M' else game_config.list_of_female_names)
 
         temp_player_preferred_partner_types = current_player.preferred_partner_types[:]
         if(game_config.list_of_all_types[index][0] in current_player.preferred_partner_types):
@@ -139,6 +63,9 @@ def randomize_partners(current_player: player(), game_config: data_config() , nu
             temp_player_preferred_partner_types.append(game_config.list_of_all_types[index][0])
         
         p.personality_types = sorted(temp_player_preferred_partner_types[:])
+
+        
+
         partners.append(p)
 
     return partners
@@ -148,7 +75,7 @@ def end_game():
     if  end_game_option == '1':
         main()
     else:
-        sys.exit()
+        sys.exit(0)
 
 def string_validation(question):
         try:
@@ -158,7 +85,7 @@ def string_validation(question):
             return user_input
         except KeyboardInterrupt:
             # quit
-            sys.exit()
+            sys.exit(0)
         except:
             print('Please enter a valid name')
             string_validation(question)
@@ -175,16 +102,46 @@ def age_validation(question):
             return age
         except KeyboardInterrupt:
             # quit
-            sys.exit()
+            sys.exit(0)
         except:
             print('Please enter a valid number')
             age_validation(question)
+
+def display_partners(partners: []):
+    print('Now let introduce your 3 lovely partners...')
+    print("----------------------------------------------------------------")
+    
+    partner_no=1
+    for p in partners:
+        p_num_and_title = f"[{str(partner_no)}]"
+        p_num_and_title = "{:<15}".format(p_num_and_title)
+        print(f"{p_num_and_title}{p.name}")
+        print("{:<15}".format(f"Age")+ str(p.age))
+        print("{:<15}".format(f"Occupation")+ p.occupation)
+        
+        personalities = ""
+        for pt in p.personality_types:
+            personalities += ", " + pt
+        personalities = personalities[2:]
+
+        print("{:<15}".format(f"Personality")+ personalities)
+        partner_no+=1
+
+        #temp fix: convert class to dict
+        # partnerdict = {key:value for key, value in p.__dict__.items() if not key.startswith('__') and not callable(key)}
+
+        # for key,value in partnerdict.items():
+        #     print(f"{key:<15}  {value}")
+        print("----------------------------------------------------------------")
+    print()
+
             
 
 def main():    
     game_config = data_config()
     current_player = player()
 
+    ###### START OF SECTION 1: GAME CUSTOMIZATION ######
     print()
     print('Welcome to Dating Simulator 2020')
     print()
@@ -201,37 +158,26 @@ def main():
     print("Make your choices by answering 1 or 2.")
     print()
     
+    #Gets Personality Type Preferences from user
     for i in range(3):
         chosen_type = int(choose_options(game_config.partner_preference_questions[i]))
         current_player.preferred_partner_types.append(game_config.list_of_all_types[i][chosen_type-1])
         print()
         
-    print('Now let introduce your 3 partners')
-    print("----------------------------------------------------------------")
     partners= randomize_partners(current_player, game_config , 3)
-    partner_no=1
-
-    for p in partners:
-        print(str(partner_no)+")")
-        partner_no+=1
-
-        #temp fix: convert class to dict
-        partnerdict = {key:value for key, value in p.__dict__.items() if not key.startswith('__') and not callable(key)}
-
-        for key,value in partnerdict.items():
-            print(f"{key:<15}  {value}")
-        print("----------------------------------------------------------------")
-        print()
-
-    partner_choices = ["Please make your choice now\n\nChoice: ",['1','2','3']]
+    display_partners(partners)
+    partner_choices = ["Who would you like to meet?\n\nChoice: ",['1','2','3']]
     chosen_partner_no= int(choose_options(partner_choices))
     chosen_partner: partner() = partners[chosen_partner_no-1]
     print()
-
-    # Part 3: Scenario Time!
     print(f"You have chosen {chosen_partner.name}! \nAre you ready to unlock this new journey in knowing {chosen_partner.name}?\n")
     print("Press [ENTER] to continue!")
     input("")
+
+    ###### END OF SECTION 1: GAME CUSTOMIZATION ######
+
+    ###### START OF SECTION 2: STORY TIME ######
+
     updated_plotline = game_config.plotline.replace("_player_",current_player.name).replace("_partner_",chosen_partner.name)
     storyline = JsonConvert.FromJSON(updated_plotline)
 
@@ -300,6 +246,8 @@ def main():
             break
 
     end_game()
+
+    ###### END OF SECTION 2: STORY TIME ######
     
 if __name__ == '__main__':
     main()
