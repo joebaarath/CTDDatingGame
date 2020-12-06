@@ -144,7 +144,7 @@ def randomize_partners(current_player: player(), game_config: data_config() , nu
     return partners
 
 def end_game():
-    end_game_option = choose_options(['Would you like to play again?\n[1] Restart\n[2] Exit the game\n\nChoice: ', ['1','2']])
+    end_game_option = choose_options(['Would you like to play again?\n\n[1] Restart\n[2] Exit the game\n\nChoice: ', ['1','2']])
     if  end_game_option == '1':
         main()
     else:
@@ -156,6 +156,9 @@ def string_validation(question):
             if len(user_input) == 0 or user_input.isnumeric() :
                 raise Exception
             return user_input
+        except KeyboardInterrupt:
+            # quit
+            sys.exit()
         except:
             print('Please enter a valid name')
             string_validation(question)
@@ -170,6 +173,9 @@ def age_validation(question):
                 plt.show()
                 end_game()
             return age
+        except KeyboardInterrupt:
+            # quit
+            sys.exit()
         except:
             print('Please enter a valid number')
             age_validation(question)
@@ -200,7 +206,6 @@ def main():
         current_player.preferred_partner_types.append(game_config.list_of_all_types[i][chosen_type-1])
         print()
         
-    print()
     print('Now let introduce your 3 partners')
     print("----------------------------------------------------------------")
     partners= randomize_partners(current_player, game_config , 3)
@@ -227,7 +232,6 @@ def main():
     print(f"You have chosen {chosen_partner.name}! \nAre you ready to unlock this new journey in knowing {chosen_partner.name}?\n")
     print("Press [ENTER] to continue!")
     input("")
-    print()
     updated_plotline = game_config.plotline.replace("_player_",current_player.name).replace("_partner_",chosen_partner.name)
     storyline = JsonConvert.FromJSON(updated_plotline)
 
@@ -242,7 +246,7 @@ def main():
                 print(f"[{option.id}] {option.option}")
                 option_ids.append(option.id)
             print()
-            choice=int(choose_options(['Reply:',option_ids]))
+            choice=int(choose_options(['Reply: ',option_ids]))
             selected_option = scenario.mcqs[mcq_id-1].options[choice-1]
             print()
             # Check if selected_option made has any follow up action
@@ -272,8 +276,10 @@ def main():
             #display final win scene
             print(f"*2 years later*")
             print(f"{chosen_partner.name} and {current_player.name} have been married and now have a new kid! Yay!")
+            print()
             print(f"Congrat you have won the game!")
             print(f"Hope you had fun!")
+            print()
             pass
         elif current_player.score > 1:
             #display round win scene
@@ -281,6 +287,7 @@ def main():
             img = plt.imread('https://upload.wikimedia.org/wikipedia/commons/e/e6/Finger_heart.png')
             plt.imshow(img)
             plt.show()
+            print()
             pass
         else:
             #display lose scene
