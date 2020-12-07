@@ -164,6 +164,7 @@ def main():
     print()
     slow_typing('Welcome to Dating Simulator 2020',10,'cyan')
     print()
+    print()
     current_player.name = string_validation(game_config.player_profile_questions["name"])
     print()
     current_player.age = age_validation(game_config.player_profile_questions["age"])
@@ -287,7 +288,6 @@ def main():
                     # Create Tuple
                     jump_to_scenario = (selected_option.jump_to_scenario_id,selected_option.jump_to_scenario_path)
         print()
-        print()
         slow_typing(f"\nEnd of Scenario {scenario.id}\n\n", 10 , 'yellow')
         
         #####TEMP 
@@ -302,7 +302,7 @@ def main():
             display_image('http://www.pngall.com/wp-content/uploads/4/Golden-Cup.png')
             print()
         #Check if score is sufficient for player to proceed
-        elif current_player.score > 0:
+        elif current_player.score >= 0:
             #display round win scene
             print()
             slow_typing((game_config.win_scenes[scenario.id]).replace("_br_","\n").replace("_partner_",chosen_partner.name).replace("_player_",current_player.name), 20 , 'green')
