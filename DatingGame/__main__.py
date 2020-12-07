@@ -133,6 +133,7 @@ def age_validation(question):
 
 def display_partners(partners: []):
     slow_typing('Now let introduce your 3 lovely partners...', 20, 'green')
+    print()
     print("----------------------------------------------------------------")
     
     partner_no=1
@@ -210,37 +211,45 @@ def main():
             if(temp_scenario_id != scenario.id):
                 continue
             else:
-                if(temp_scenario_path != scenario.path):
+                if(temp_scenario_path == '' or temp_scenario_path == None ):
+                    if(scenario.path == '' or scenario.path == None):
+                        jump_to_scenario = ()
+                    else:
+                        continue
+                elif(temp_scenario_path != scenario.path):
                     continue
                 else:
                     jump_to_scenario = ()
 
-        print(f"Start of Scenario {scenario.id}: {scenario.title}\n")
+        print(f"Start of Scenario {scenario.id}: {scenario.title}")
         mcq_id = 1
         while mcq_id <= len(scenario.mcqs):
-            slow_typing(scenario.mcqs[mcq_id-1].question.replace("_br_","\n"), 10, 'blue')
             print()
+            slow_typing(scenario.mcqs[mcq_id-1].question.replace("_br_","\n"), 10, 'blue')
+            print("\n")
             option_ids=[]
             for option in scenario.mcqs[mcq_id-1].options:
                 ############TEMP CHEAT SHEET
-                #print(f"[{option.id}] {option.option} [ANSWER:{option.personality_type in chosen_partner.personality_types}][JUMP TO SCENARIO:{option.jump_to_scenario_id}{option.jump_to_scenario_path}]" )
-                print(f"[{option.id}] {option.option}")
+                print(f"[{option.id}] {option.option} [ANSWER:{option.personality_type in chosen_partner.personality_types}][JUMP TO SCENARIO:{option.jump_to_scenario_id}{option.jump_to_scenario_path}]" )
+                #print(f"[{option.id}] {option.option}")
                 option_ids.append(option.id)
             print()
             choice=int(choose_options(['Reply: ',option_ids]))
             selected_option = scenario.mcqs[mcq_id-1].options[choice-1]
-            print()
             # Check if selected_option made has any follow up action
             # 1) Does choice personality match with partner? (if so add score and response_positive if exist)
             if(selected_option.personality_type in chosen_partner.personality_types):
                 current_player.score += 1
                 if(selected_option.response_positive != None and selected_option.response_positive != ""):
-                    print(selected_option.response_positive)
+                    print()
+                    slow_typing(selected_option.response_positive.replace("_br_","\n"), 10, 'blue')
             # 2) Does choice personality not match with partner? (if so minus score and response_negative if exist)
             else:
-                current_player.score += -2
+                ### temp minus score
+                #current_player.score += -2
                 if(selected_option.response_negative != None and selected_option.response_negative != ""):
-                    print(selected_option.response_negative)
+                    print()
+                    slow_typing(selected_option.response_negative.replace("_br_","\n"), 10, 'blue')
             # 3) Does jump_to_mcq_id exist? if so jump else continue
             if(selected_option.jump_to_mcq_id != None and selected_option.jump_to_mcq_id != 0):
                 if(selected_option.jump_to_mcq_id < 0):
@@ -249,8 +258,8 @@ def main():
                     mcq_id = selected_option.jump_to_mcq_id
             
             mcq_id += 1
-            # 4) Does jump_to_scenario_id & jump_to_scenario_option exist 
-            if(selected_option.jump_to_scenario_id != None and selected_option.jump_to_scenario_id != 0 and selected_option.jump_to_scenario_path != None and selected_option.jump_to_scenario_path != ""):
+            # 4) Does jump_to_scenario_id exist 
+            if(selected_option.jump_to_scenario_id != None and selected_option.jump_to_scenario_id != 0):
                 if(selected_option.jump_to_scenario_id < 0):
                     break
                 else:
@@ -259,6 +268,7 @@ def main():
 
             
         slow_typing(f"End of Scenario {scenario.id}\n\n", 10 , 'green')
+        
 
 
         #####TEMP
@@ -276,6 +286,7 @@ def main():
             pass
         elif current_player.score > 0:
             #display round win scene
+            print()
             slow_typing(f"Have fun on your date with {chosen_partner.name} tomorrow! ", 20 , 'green')
             display_image('https://upload.wikimedia.org/wikipedia/commons/e/e6/Finger_heart.png')
             print()
