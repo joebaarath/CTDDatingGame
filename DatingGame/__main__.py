@@ -232,6 +232,7 @@ def main():
             print(f"Have fun on your date with {chosen_partner.name} tomorrow! ")
             img = plt.imread('https://upload.wikimedia.org/wikipedia/commons/e/e6/Finger_heart.png')
             plt.imshow(img)
+            plt.axis("off")
             plt.show()
             print()
             pass
@@ -241,6 +242,7 @@ def main():
             print("Game over bro")
             img = plt.imread('https://upload.wikimedia.org/wikipedia/commons/thumb/b/bb/Broken_heart.svg/166px-Broken_heart.svg.png')
             plt.imshow(img)
+            plt.axis("off")
             plt.show()
             print()
             break
