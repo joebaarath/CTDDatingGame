@@ -66,13 +66,15 @@ class JsonConvert(object):
 
 @JsonConvert.register
 class option(object):
-    def __init__(self, id:int=None, option:str="", personality_type:str="", response_positive:str="", response_negative:str="", jump_to_mcq_id:int=None):
+    def __init__(self, id:int=None, option:str="", personality_type:str="", response_positive:str="", response_negative:str="", jump_to_mcq_id:int=None, jump_to_scenario_id:int=None, jump_to_scenario_path:str=""):
         self.id = id
         self.option = option
         self.personality_type = personality_type
         self.response_positive = response_positive
         self.response_negative = response_negative
         self.jump_to_mcq_id = jump_to_mcq_id
+        self.jump_to_scenario_id = jump_to_scenario_id
+        self.jump_to_scenario_path = jump_to_scenario_path
         return
 
 @JsonConvert.register
@@ -85,8 +87,10 @@ class mcq(object):
  
 @JsonConvert.register
 class scenario(object):
-    def __init__(self, id:int=None, mcqs:[mcq]=None):
+    def __init__(self, id:int=None, title:str="", path:str="", mcqs:[mcq]=None):
         self.id = id
+        self.title = title
+        self.path = path
         self.mcqs = [] if mcqs is None else mcqs
         return
 

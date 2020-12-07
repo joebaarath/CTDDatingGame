@@ -151,11 +151,6 @@ def display_partners(partners: []):
         print("{:<15}".format(f"Personality")+ personalities)
         partner_no+=1
 
-        #temp fix: convert class to dict
-        # partnerdict = {key:value for key, value in p.__dict__.items() if not key.startswith('__') and not callable(key)}
-
-        # for key,value in partnerdict.items():
-        #     print(f"{key:<15}  {value}")
         print("----------------------------------------------------------------")
     print()
     
@@ -203,15 +198,32 @@ def main():
 
     updated_plotline = game_config.plotline.replace("_player_",current_player.name).replace("_partner_",chosen_partner.name)
     storyline = JsonConvert.FromJSON(updated_plotline)
+    jump_to_scenario = ()
+    counter = 0
 
     for scenario in storyline.scenarios:
-        print(f"Start of Scenario {scenario.id}\n")
+        counter += 1
+        #Check if jump_to_scenario is not empty
+        if len(jump_to_scenario) > 0:
+            temp_scenario_id = jump_to_scenario[0]
+            temp_scenario_path = jump_to_scenario[1]
+            if(temp_scenario_id != scenario.id):
+                continue
+            else:
+                if(temp_scenario_path != scenario.path):
+                    continue
+                else:
+                    jump_to_scenario = ()
+
+        print(f"Start of Scenario {scenario.id}: {scenario.title}\n")
         mcq_id = 1
         while mcq_id <= len(scenario.mcqs):
             slow_typing(scenario.mcqs[mcq_id-1].question.replace("_br_","\n"), 10, 'blue')
             print()
             option_ids=[]
             for option in scenario.mcqs[mcq_id-1].options:
+                ############TEMP CHEAT SHEET
+                #print(f"[{option.id}] {option.option} [ANSWER:{option.personality_type in chosen_partner.personality_types}][JUMP TO SCENARIO:{option.jump_to_scenario_id}{option.jump_to_scenario_path}]" )
                 print(f"[{option.id}] {option.option}")
                 option_ids.append(option.id)
             print()
@@ -235,13 +247,25 @@ def main():
                     break
                 else:
                     mcq_id = selected_option.jump_to_mcq_id
-            else:
-                mcq_id += 1
+            
+            mcq_id += 1
+            # 4) Does jump_to_scenario_id & jump_to_scenario_option exist 
+            if(selected_option.jump_to_scenario_id != None and selected_option.jump_to_scenario_id != 0 and selected_option.jump_to_scenario_path != None and selected_option.jump_to_scenario_path != ""):
+                if(selected_option.jump_to_scenario_id < 0):
+                    break
+                else:
+                    # Create Tuple
+                    jump_to_scenario = (selected_option.jump_to_scenario_id,selected_option.jump_to_scenario_path)
+
             
         slow_typing(f"End of Scenario {scenario.id}\n\n", 10 , 'green')
 
+
+        #####TEMP
+        print("Current Score of player:" + str(current_player.score))
+
         #Check if score is sufficient for player to proceed
-        if current_player.score > 1 and scenario.id == len(storyline.scenarios):
+        if current_player.score > 0 and counter == len(storyline.scenarios):
             #display final win scene
             print(f"*2 years later*")
             print(f"{chosen_partner.name} and {current_player.name} have been married and now have a new kid! Yay!")
@@ -250,7 +274,7 @@ def main():
             print(f"Hope you had fun!")
             print()
             pass
-        elif current_player.score > 1:
+        elif current_player.score > 0:
             #display round win scene
             slow_typing(f"Have fun on your date with {chosen_partner.name} tomorrow! ", 20 , 'green')
             display_image('https://upload.wikimedia.org/wikipedia/commons/e/e6/Finger_heart.png')
