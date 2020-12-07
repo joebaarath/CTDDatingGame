@@ -3,6 +3,7 @@ import sys
 import matplotlib.pyplot as plt
 from data_config import *
 from game_class import *
+from termcolor import colored
 
 def choose_options(qns_and_options):
     question = qns_and_options[0]
@@ -99,17 +100,19 @@ def string_validation(question):
 def age_validation(question):
         try:
             age = int(input(question))
-            if age <= 13:
-                print('You are underaged. Seek parental guidance.')
-                display_image('https://www.imda.gov.sg/-/media/Imda/Images/Content/Regulation-Licensing-and-Consultations/Content-Standards-and-classification/Classification-Rating/PG13-Rating.png?la=en&hash=FDB0D0A4021A703C98A3E791D1EA3E9494BB70A7')
-                end_game()
-            return age
-        except KeyboardInterrupt:
+        except KeyboardInterrupt: #purpose?
             # quit
             sys.exit(0)
         except:
             print('Please enter a valid number')
+            print(age)
             age_validation(question)
+        else:
+            if age <= 13:
+                print(colored('You are underaged. Seek parental guidance.','red',attrs=['bold']))
+                display_image('https://www.imda.gov.sg/-/media/Imda/Images/Content/Regulation-Licensing-and-Consultations/Content-Standards-and-classification/Classification-Rating/PG13-Rating.png?la=en&hash=FDB0D0A4021A703C98A3E791D1EA3E9494BB70A7')
+                end_game()
+            return age
 
 def display_partners(partners: []):
     print('Now let introduce your 3 lovely partners...')
@@ -146,7 +149,7 @@ def main():
 
     ###### START OF SECTION 1: GAME CUSTOMIZATION ######
     print()
-    print('Welcome to Dating Simulator 2020')
+    print(colored('Welcome to Dating Simulator 2020','cyan',attrs = ['bold']))
     print()
     current_player.name = string_validation(game_config.player_profile_questions["name"])
     print()
