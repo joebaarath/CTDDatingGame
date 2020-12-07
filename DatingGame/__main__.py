@@ -19,6 +19,12 @@ def choose_options(qns_and_options):
         option = choose_options(qns_and_options)
     return option
 
+def display_image(url):
+     img = plt.imread(url)
+     plt.imshow(img)
+     plt.axis("off")
+     plt.show()
+
 def randomize_partners(current_player: player(), game_config: data_config() , num_of_partners: int() = 3 ):
     list_of_ages = list(range(current_player.age if current_player.age <= 23 else current_player.age - 5, current_player.age +5))
     partners = []
@@ -95,9 +101,7 @@ def age_validation(question):
             age = int(input(question))
             if age <= 13:
                 print('You are underaged. Seek parental guidance.')
-                img = plt.imread('https://www.imda.gov.sg/-/media/Imda/Images/Content/Regulation-Licensing-and-Consultations/Content-Standards-and-classification/Classification-Rating/PG13-Rating.png?la=en&hash=FDB0D0A4021A703C98A3E791D1EA3E9494BB70A7')
-                plt.imshow(img)
-                plt.show()
+                display_image('https://www.imda.gov.sg/-/media/Imda/Images/Content/Regulation-Licensing-and-Consultations/Content-Standards-and-classification/Classification-Rating/PG13-Rating.png?la=en&hash=FDB0D0A4021A703C98A3E791D1EA3E9494BB70A7')
                 end_game()
             return age
         except KeyboardInterrupt:
@@ -134,8 +138,7 @@ def display_partners(partners: []):
         #     print(f"{key:<15}  {value}")
         print("----------------------------------------------------------------")
     print()
-
-            
+    
 
 def main():    
     game_config = data_config()
@@ -230,20 +233,14 @@ def main():
         elif current_player.score > 1:
             #display round win scene
             print(f"Have fun on your date with {chosen_partner.name} tomorrow! ")
-            img = plt.imread('https://upload.wikimedia.org/wikipedia/commons/e/e6/Finger_heart.png')
-            plt.imshow(img)
-            plt.axis("off")
-            plt.show()
+            display_image('https://upload.wikimedia.org/wikipedia/commons/e/e6/Finger_heart.png')
             print()
             pass
         else:
             #display lose scene
             print("She ghosted you")
             print("Game over bro")
-            img = plt.imread('https://upload.wikimedia.org/wikipedia/commons/thumb/b/bb/Broken_heart.svg/166px-Broken_heart.svg.png')
-            plt.imshow(img)
-            plt.axis("off")
-            plt.show()
+            display_image('https://upload.wikimedia.org/wikipedia/commons/thumb/b/bb/Broken_heart.svg/166px-Broken_heart.svg.png')
             print()
             break
 
