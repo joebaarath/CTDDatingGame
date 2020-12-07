@@ -280,6 +280,7 @@ def main():
             slow_typing(f"{chosen_partner.name} and {current_player.name} have been married and now have a new kid! Yay!\n", 20, 'yellow')
             print()
             slow_typing(f"Congrat you have won the game!\n", 15, 'cyan')
+            display_image('http://www.pngall.com/wp-content/uploads/4/Golden-Cup.png')
             slow_typing(f"Hope you had fun!\n", 15, 'cyan')
             print()
             pass
