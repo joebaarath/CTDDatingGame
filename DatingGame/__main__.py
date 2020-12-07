@@ -221,7 +221,9 @@ def main():
                 else:
                     jump_to_scenario = ()
 
-        print(f"Start of Scenario {scenario.id}: {scenario.title}")
+        
+        slow_typing(f"Start of Scenario {scenario.id}: {scenario.title}", 10 , 'green')
+        print()
         mcq_id = 1
         while mcq_id <= len(scenario.mcqs):
             print()
@@ -237,16 +239,35 @@ def main():
             choice=int(choose_options(['Reply: ',option_ids]))
             selected_option = scenario.mcqs[mcq_id-1].options[choice-1]
             # Check if selected_option made has any follow up action
+            #flatten list
+            list_of_persoanlities = [item for sublist in game_config.list_of_all_types for item in sublist]
+            # 1) Does personality belong to special case (Plus, Minus, Bonus)
+            if(selected_option.personality_type == "Plus" or selected_option.personality_type == "Minus" or selected_option.personality_type == "Bonus"):
+                if selected_option.personality_type == "Plus" :
+                    current_player.score += 1
+                    if(selected_option.response_positive != ""):
+                        print()
+                        slow_typing(selected_option.response_positive.replace("_br_","\n"), 10, 'blue')
+                elif selected_option.personality_type == "Minus" :
+                    current_player.score += -10
+                    if(selected_option.response_negative != ""):
+                        print()
+                        slow_typing(selected_option.response_negative.replace("_br_","\n"), 10, 'blue')
+                # elif selected_option.personality_type == "Bonus" :
+                #     current_player.score += 1
+                #     if(selected_option.response_positive != ""):
+                #         print()
+                #         slow_typing(selected_option.response_positive.replace("_br_","\n"), 10, 'blue')
+                    
             # 1) Does choice personality match with partner? (if so add score and response_positive if exist)
-            if(selected_option.personality_type in chosen_partner.personality_types):
+            elif(selected_option.personality_type in chosen_partner.personality_types):
                 current_player.score += 1
                 if(selected_option.response_positive != None and selected_option.response_positive != ""):
                     print()
                     slow_typing(selected_option.response_positive.replace("_br_","\n"), 10, 'blue')
             # 2) Does choice personality not match with partner? (if so minus score and response_negative if exist)
             else:
-                ### temp minus score
-                #current_player.score += -2
+                current_player.score += -2
                 if(selected_option.response_negative != None and selected_option.response_negative != ""):
                     print()
                     slow_typing(selected_option.response_negative.replace("_br_","\n"), 10, 'blue')
@@ -267,32 +288,24 @@ def main():
                     jump_to_scenario = (selected_option.jump_to_scenario_id,selected_option.jump_to_scenario_path)
 
         print()
+        print()
         slow_typing(f"End of Scenario {scenario.id}\n\n", 10 , 'green')
         
-        #####TEMP
-        print("Current Score of player:" + str(current_player.score))
+        #####TEMP 
+        slow_typing("Your Game Score: " + str(current_player.score*1000) + "\n", 10 , 'green')
 
         #Check if score is sufficient for player to proceed
-        if current_player.score > 0 and counter == len(storyline.scenarios):
-            #display final win scene
-            print(f"*2 years later*")
-            print(f"{chosen_partner.name} and {current_player.name} have been married and now have a new kid! Yay!")
-            print()
-            print(f"Congrat you have won the game!")
-            print(f"Hope you had fun!")
-            print()
-            pass
-        elif current_player.score > 0:
+        if current_player.score > 0:
             #display round win scene
             print()
-            slow_typing(f"Have fun on your date with {chosen_partner.name} tomorrow! ", 20 , 'green')
+            slow_typing((game_config.win_scenes[scenario.id]).replace("_br_","\n").replace("_partner_",chosen_partner.name).replace("_player_",current_player.name), 20 , 'green')
             display_image('https://upload.wikimedia.org/wikipedia/commons/e/e6/Finger_heart.png')
             print()
-            pass
+            print()
         else:
             #display lose scene
-            slow_typing("She ghosted you\n", 5 , 'red')
-            slow_typing("Game over bro\n", 5, 'red')
+            print()
+            slow_typing(random.choice(game_config.lose_scenes).replace("_br_","\n").replace("_partner_",chosen_partner.name).replace("_player_",current_player.name), 5 , 'red')
             display_image('https://upload.wikimedia.org/wikipedia/commons/thumb/b/bb/Broken_heart.svg/166px-Broken_heart.svg.png')
             print()
             break

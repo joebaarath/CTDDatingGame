@@ -33,6 +33,17 @@ class data_config():
                                                 ["What do you prefer more in a partner?\nMy partner has to be:\n\n[1] Adventurous\n[2] Conservative\n\nChoice: ",['1','2']]
                                             ]
 
+        self.lose_scenes =  [
+                                "Unfortunately, _partner_ is not interested in hanging with you anymore… Game Over",
+                                "Rejection hurts, and you hurt _partner_! There are no second chances in life... Game over",
+                            ]
+
+        self.win_scenes =  {
+                                        1 : "That was fun texting _partner_!\nGet ready now for your big date with _partner_!!\nAll the best _player_!!",
+                                        2 : "OMG!!! That was a pretty cool date!! \nNow it's time for your big final date with _partner_!!\nGood Luck _player_!!!!",
+                                        3 : "Seems like you and _partner_ will be going on more dates together!!\nThings are magical with you two!\nBoth of you are a match made in heaven!!\nCongrats you won the game!!\nHope you had funnnn...."
+                                    }
+
         self.list_of_all_types = [['Athletic', 'Artistic'], 
                     ['Introvert','Extrovert'], 
                     ['Adventurous','Conservative']]

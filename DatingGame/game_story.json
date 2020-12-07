@@ -106,10 +106,10 @@
                                                 },
                                                 {
                                                     "id": 2,
-                                                    "option": "Relax on one of the benches in the corner- enjoying the 'Gardens of Time' view.",
+                                                    "option": "Relax on one of the benches in the corner- Enjoying the 'Gardens of Time' view.",
                                                     "personality_type": "Conservative",
                                                     "response_positive": "_player_: I guess we can first relax in the benches in the corner and enjoy the Garden view._br__partner_: Yeah! I was exactly thinking about this. I think we'll be a good match. I have always wanted to enjoy 'Gardens of the Time'. I have heard it is quite unique._br__player_: *blushes* and sends a wink in your direction._br_You and _partner_ head to the benches. Both of you have fruitful and insightful discussions about the nature alley ( Gardens of the Time ). Both of you have a great time.",
-                                                    "response_negative": "_player_: I guess we can first relax in the benches in the corner and enjoy the Garden view._br__partner_ stares in slight shock. Then, _partner_ passes a smile. Both of you head to the benches._br_There are frequent moments of awkward silence. _partner_ seems a bit bored._br_After a while,_partner_: Let's do something else.... You want to?",
+                                                    "response_negative": "_player_: I guess we can first relax in the benches in the corner and enjoy the Garden view._br__partner_ stares in slight shock. Then, _partner_ passes a smile. Both of you head to the benches._br_There are frequent moments of awkward silence. _partner_ seems a bit bored._br_After a while..._br__partner_: Let's do something else....",
                                                     "jump_to_mcq_id": null,
                                                     "jump_to_scenario_id": null,
                                                     "jump_to_scenario_path": null
@@ -124,8 +124,8 @@
                                                     "id": 1,
                                                     "option": "Do you want to Participate in a 'couple scavenger hunt' of the exhibits? Couples compete against one other.",
                                                     "personality_type": "Extrovert",
-                                                    "response_positive": "_partner_: YEAH! This seems so exciting. Let's sign up._br__player_: sends a wink_br_Both you and _partner_ enjoy every bit of the scavenger hunt. Infact, you both win the mini contest against all couples. In return, you win a few balloons and heart shaped chocolates_br_Surprisingly, you both have a great chemistry. _partner_ hands you all the heart shaped chocolates and balloons you both just won.",
-                                                    "response_negative": "_partner_: (Hesitates) Oh alright, I didn't expect this_br__br_Both of you sign up for the mini scavenger hunt._br_There are moments where _partner_ isn't taking in any effort for the date or for the contest. Your team loses the first round of the hunt itself._br_Date is cut short._br_Date over",
+                                                    "response_positive": "_partner_: YEAH! This seems so exciting. Let's sign up._br__player_: sends a wink_br_Both you and _partner_ enjoy every bit of the scavenger hunt._br_Infact, you both win the mini contest against all couples._br_In return, you win a few balloons and heart shaped chocolates_br_Surprisingly, you both have a great chemistry._br__partner_ hands you all the heart shaped chocolates and balloons you both just won.",
+                                                    "response_negative": "_partner_: (Hesitates) Oh alright, I didn't expect this_br__br_Both of you sign up for the mini scavenger hunt._br_There are moments where _partner_ isn't taking in any effort for the date or for the contest._br_Your team loses the first round of the hunt itself._br_Date is cut short._br_Date over",
                                                     "jump_to_mcq_id": null,
                                                     "jump_to_scenario_id": 3,
                                                     "jump_to_scenario_path": null
@@ -232,16 +232,16 @@
 								{
                                     "id": 3,
 									"path": "",
-                                    "title": "FINALE",
+                                    "title": "Finale (After First Date)",
                                     "mcqs": [
                                         {
                                             "id": 1,
-                                            "question": "You have just received your first message from _partner_!_br_Make your choices by answering 1 or 2._br__br__partner_: Heyyyy _player_ :)_br__partner_: I am _partner_!_br__partner_: Looking forward to seeing you tommorow, _player_!",
+                                            "question": "Both you and _partner_ are walking home after having spending a long and fun day together.",
                                             "options": [
                                                 {
                                                     "id": 1,
-                                                    "option": "Me too~",
-                                                    "personality_type": "Introvert",
+                                                    "option": "Initiate small talk",
+                                                    "personality_type": "Extrovert",
                                                     "response_positive": "",
                                                     "response_negative": "",
                                                     "jump_to_mcq_id": null,
@@ -250,8 +250,8 @@
                                                 },
                                                 {
                                                     "id": 2,
-                                                    "option": "Yes of course! Always excited to meet new friends",
-                                                    "personality_type": "Extrovert",
+                                                    "option": "Keep Quiet",
+                                                    "personality_type": "Introvert",
                                                     "response_positive": "",
                                                     "response_negative": "",
                                                     "jump_to_mcq_id": null,
@@ -262,23 +262,23 @@
                                         },
                                         {
                                             "id": 2,
-                                            "question": "_partner_: So do you have any idea where we should head tomorrow?",
+                                            "question": "_partner_: Haha! Well, I hope you had a fun day today!",
                                             "options": [
                                                 {
                                                     "id": 1,
-                                                    "option": "idk >< I don't really know much places..",
+                                                    "option": "I did! Thank you",
                                                     "personality_type": "Conservative",
-                                                    "response_positive": "Hehehe me too",
-                                                    "response_negative": "Okay.",
+                                                    "response_positive": "_partner_: Smiles back at you ",
+                                                    "response_negative": "",
                                                     "jump_to_mcq_id": null,
                                                     "jump_to_scenario_id": null,
                                                     "jump_to_scenario_path": null
                                                 },
                                                 {
                                                     "id": 2,
-                                                    "option": "Anywhere that's fun sounds great!",
+                                                    "option": "Yup of course I had fun, because of you~",
                                                     "personality_type": "Adventurous",
-                                                    "response_positive": "Yeahhh",
+                                                    "response_positive": "_partner_: Same here :) As long I am spending time with you, even doing nothing would be fun!",
                                                     "response_negative": "",
                                                     "jump_to_mcq_id": null,
                                                     "jump_to_scenario_id": null,
@@ -288,24 +288,24 @@
                                         },
                                         {
                                             "id": 3,
-                                            "question": "_partner_: So would you like to visit the museum?_br__partner_: Or do you wanna head to the beach?",
+                                            "question": "The atmosphere suddenly changes when _partner_ stops to stare at you and leans towards you slightly.",
                                             "options": [
                                                 {
                                                     "id": 1,
-                                                    "option": "Let's go to the museum then~",
-                                                    "personality_type": "Artistic",
-                                                    "response_positive": "Yess!!",
-                                                    "response_negative": "Okay.",
+                                                    "option": "Shyly go in for a hug",
+                                                    "personality_type": "Plus",
+                                                    "response_positive": "_partner_: I really like you... I hope we can see each other again_br__partner_ tightens the hug",
+                                                    "response_negative": "",
                                                     "jump_to_mcq_id": null,
                                                     "jump_to_scenario_id": 2,
                                                     "jump_to_scenario_path": "A"
                                                 },
                                                 {
                                                     "id": 2,
-                                                    "option": "Yup! I want to go to the beach!",
-                                                    "personality_type": "Athletic",
-                                                    "response_positive": "YEAHHH!!",
-                                                    "response_negative": "Okay.",
+                                                    "option": "Take a step back",
+                                                    "personality_type": "Minus",
+                                                    "response_positive": "",
+                                                    "response_negative": "_partner_: I'm sorry, I thought you felt the same way about me... It was nice meeting you",
                                                     "jump_to_mcq_id": null,
                                                     "jump_to_scenario_id": 2,
                                                     "jump_to_scenario_path": "B"
