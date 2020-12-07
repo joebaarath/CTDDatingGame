@@ -4,6 +4,10 @@ import matplotlib.pyplot as plt
 from data_config import *
 from game_class import *
 import time
+from colorama import init
+from termcolor import colored
+
+#init()
 
 def choose_color(value):
     sys.stdout.write(data_config().colors['off'])
