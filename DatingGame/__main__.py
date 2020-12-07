@@ -7,7 +7,7 @@ import time
 from colorama import init
 #from termcolor import colored
 
-init()
+init()#comment out and restart kernel if you want color while testing code
 
 def choose_color(value):
     sys.stdout.write(data_config().colors['off'])
@@ -132,7 +132,7 @@ def age_validation(question):
             return age
 
 def display_partners(partners: []):
-    slow_typing('Now let introduce your 3 lovely partners...', 20, 'green')
+    slow_typing('Now let introduce your 3 lovely partners...\n', 20, 'yellow')
     print()
     print("----------------------------------------------------------------")
     
@@ -173,7 +173,7 @@ def main():
     current_player.partner_gender = choose_options((game_config.player_profile_questions["partner_gender"]))
 
     print()
-    slow_typing(f"Hi {current_player.name}, let's move on to some other questions regarding your dating preferences\n", 20, 'green')
+    slow_typing(f"Hi {current_player.name}, let's move on to some other questions regarding your dating preferences\n", 20, 'yellow')
     print("Make your choices by answering 1 or 2.")
     print()
     
@@ -189,7 +189,7 @@ def main():
     chosen_partner_no= int(choose_options(partner_choices))
     chosen_partner: partner() = partners[chosen_partner_no-1]
     print()
-    slow_typing(f"You have chosen {chosen_partner.name}! \nAre you ready to unlock this new journey in knowing {chosen_partner.name}?\n", 20, 'green')
+    slow_typing(f"You have chosen {chosen_partner.name}! \nAre you ready to unlock this new journey in knowing {chosen_partner.name}?\n", 20, 'yellow')
     print("Press [ENTER] to continue!")
     input("")
 
@@ -225,7 +225,7 @@ def main():
         mcq_id = 1
         while mcq_id <= len(scenario.mcqs):
             print()
-            slow_typing(scenario.mcqs[mcq_id-1].question.replace("_br_","\n"), 10, 'blue')
+            slow_typing(scenario.mcqs[mcq_id-1].question.replace("_br_","\n"), 10, 'green')
             print("\n")
             option_ids=[]
             for option in scenario.mcqs[mcq_id-1].options:
@@ -242,14 +242,14 @@ def main():
                 current_player.score += 1
                 if(selected_option.response_positive != None and selected_option.response_positive != ""):
                     print()
-                    slow_typing(selected_option.response_positive.replace("_br_","\n"), 10, 'blue')
+                    slow_typing(selected_option.response_positive.replace("_br_","\n"), 13, 'green')
             # 2) Does choice personality not match with partner? (if so minus score and response_negative if exist)
             else:
                 ### temp minus score
                 #current_player.score += -2
                 if(selected_option.response_negative != None and selected_option.response_negative != ""):
                     print()
-                    slow_typing(selected_option.response_negative.replace("_br_","\n"), 10, 'blue')
+                    slow_typing(selected_option.response_negative.replace("_br_","\n"), 8, 'green')
             # 3) Does jump_to_mcq_id exist? if so jump else continue
             if(selected_option.jump_to_mcq_id != None and selected_option.jump_to_mcq_id != 0):
                 if(selected_option.jump_to_mcq_id < 0):
@@ -266,26 +266,31 @@ def main():
                     # Create Tuple
                     jump_to_scenario = (selected_option.jump_to_scenario_id,selected_option.jump_to_scenario_path)
 
+<<<<<<< Updated upstream
         print()
         slow_typing(f"End of Scenario {scenario.id}\n\n", 10 , 'green')
+=======
+            
+        slow_typing(f"\nEnd of Scenario {scenario.id}\n\n", 10 , 'yellow')
+>>>>>>> Stashed changes
         
         #####TEMP
-        print("Current Score of player:" + str(current_player.score))
+        slow_typing(("Current Score of player:" + str(current_player.score)+ '\n'),25, 'magenta')
 
         #Check if score is sufficient for player to proceed
         if current_player.score > 0 and counter == len(storyline.scenarios):
             #display final win scene
-            print(f"*2 years later*")
-            print(f"{chosen_partner.name} and {current_player.name} have been married and now have a new kid! Yay!")
+            slow_typing(f"*2 years later*\n",10, 'yellow')
+            slow_typing(f"{chosen_partner.name} and {current_player.name} have been married and now have a new kid! Yay!\n", 20, 'yellow')
             print()
-            print(f"Congrat you have won the game!")
-            print(f"Hope you had fun!")
+            slow_typing(f"Congrat you have won the game!\n", 15, 'cyan')
+            slow_typing(f"Hope you had fun!\n", 15, 'cyan')
             print()
             pass
         elif current_player.score > 0:
             #display round win scene
             print()
-            slow_typing(f"Have fun on your date with {chosen_partner.name} tomorrow! ", 20 , 'green')
+            slow_typing(f"Have fun on your date with {chosen_partner.name} tomorrow! \n", 20 , 'green')
             display_image('https://upload.wikimedia.org/wikipedia/commons/e/e6/Finger_heart.png')
             print()
             pass
