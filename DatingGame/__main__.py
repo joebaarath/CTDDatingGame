@@ -233,8 +233,8 @@ def main():
             option_ids=[]
             for option in scenario.mcqs[mcq_id-1].options:
                 ############TEMP CHEAT SHEET
-                print(f"[{option.id}] {option.option} [ANSWER:{option.personality_type in chosen_partner.personality_types}][JUMP TO SCENARIO:{option.jump_to_scenario_id}{option.jump_to_scenario_path}]" )
-                #print(f"[{option.id}] {option.option}")
+                # print(f"[{option.id}] {option.option} [ANSWER:{option.personality_type in chosen_partner.personality_types}][JUMP TO SCENARIO:{option.jump_to_scenario_id}{option.jump_to_scenario_path}]" )
+                print(f"[{option.id}] {option.option}")
                 option_ids.append(option.id)
             print()
             choice=int(choose_options(['Reply: ',option_ids]))
@@ -290,7 +290,6 @@ def main():
         print()
         slow_typing(f"\nEnd of Scenario {scenario.id}\n\n", 10 , 'yellow')
         
-        #####TEMP 
         slow_typing("Your Game Score: " + str(current_player.score*1000) + "\n", 25 , 'magenta')
 
         if current_player.score > 0 and counter == len(storyline.scenarios):
