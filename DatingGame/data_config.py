@@ -41,7 +41,7 @@ class data_config():
         self.win_scenes =  {
                                         1 : "That was fun texting _partner_!\nGet ready now for your big date with _partner_!!\nAll the best _player_!!",
                                         2 : "OMG!!! That was a pretty cool date!! \nNow it's time for your big final date with _partner_!!\nGood Luck _player_!!!!",
-                                        3 : "Seems like you and _partner_ will be going on more dates together!!\nThings are magical with you two!\nBoth of you are a match made in heaven!!\nCongrats you won the game!!\nHope you had funnnn...."
+                                        3 : "Seems like you and _partner_ will be going on more dates together!!\nThings are magical with you two!\nBoth of you are a match made in heaven!!"
                                     }
 
         self.list_of_all_types = [['Athletic', 'Artistic'], 

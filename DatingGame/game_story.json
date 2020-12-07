@@ -219,7 +219,7 @@
                                                     "id": 2,
                                                     "option": "Let's have a round of volleyball",
                                                     "personality_type": "Athletic",
-                                                    "response_positive": "Both of you end up playing a round of volleyball against another couple at the beach._br_Surprisingly, you have great chemistry with _player_ and manage to cooperate well during the game.",
+                                                    "response_positive": "Both of you end up playing a round of volleyball against another couple at the beach._br_Surprisingly, you have great chemistry with _partner_ and manage to cooperate well during the game.",
                                                     "response_negative": "",
                                                     "jump_to_mcq_id": null,
                                                     "jump_to_scenario_id": null,
@@ -232,7 +232,7 @@
 								{
                                     "id": 3,
 									"path": "",
-                                    "title": "Finale (After First Date)",
+                                    "title": "Finale",
                                     "mcqs": [
                                         {
                                             "id": 1,
