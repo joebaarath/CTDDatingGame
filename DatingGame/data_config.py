@@ -1,6 +1,25 @@
 class data_config():
 
     def __init__(self):
+        self.colors = {
+                        'white':    "\033[1;37m",
+                        'yellow':   "\033[1;33m",
+                        'green':    "\033[1;32m",
+                        'blue':     "\033[1;34m",
+                        'cyan':     "\033[1;36m",
+                        'red':      "\033[1;31m",
+                        'magenta':  "\033[1;35m",
+                        'black':      "\033[1;30m",
+                        'darkwhite':  "\033[0;37m",
+                        'darkyellow': "\033[0;33m",
+                        'darkgreen':  "\033[0;32m",
+                        'darkblue':   "\033[0;34m",
+                        'darkcyan':   "\033[0;36m",
+                        'darkred':    "\033[0;31m",
+                        'darkmagenta':"\033[0;35m",
+                        'darkblack':  "\033[0;30m",
+                        'off':        "\033[0;0m"
+                    }
         self.player_profile_questions =  {
                                             "gender" : ['What is your gender?\n\n[M] Male\n[F] Female\n\nChoice: ', ['M','F']],
                                             "partner_gender" : ['Who are you interested in?\n\n[M] Male Partner\n[F] Female Partner\n\nChoice: ', ['M','F']],

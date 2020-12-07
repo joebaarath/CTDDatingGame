@@ -3,7 +3,19 @@ import sys
 import matplotlib.pyplot as plt
 from data_config import *
 from game_class import *
-from termcolor import colored
+import time
+
+def choose_color(value):
+    sys.stdout.write(data_config().colors['off'])
+    sys.stdout.write(data_config().colors[value])
+    
+def slow_typing(text,frequency,color):
+    choose_color(color)
+    for l in text:
+        sys.stdout.write(l)
+        sys.stdout.flush()
+        time.sleep(random.random()*1.0/frequency)
+    sys.stdout.write(data_config().colors['off'])
 
 def choose_options(qns_and_options):
     question = qns_and_options[0]
@@ -11,12 +23,12 @@ def choose_options(qns_and_options):
     option = ""
     option = str(input(question)).upper()
     if option not in options:
-        message = f'{option} is an invalid option! options are '
+        message = f'"{option}" is an invalid option! options are '
         for i in range(len(options)):
             message += options[i]
             if(i < len(options)-1):
                 message += ', '
-        print( message + '\nPlease try again.')
+        slow_typing( message + '\nPlease try again.', 20 , 'red')
         option = choose_options(qns_and_options)
     return option
 
@@ -105,17 +117,18 @@ def age_validation(question):
             sys.exit(0)
         except:
             print('Please enter a valid number')
-            print(age)
+            #print(age) bug
             age_validation(question)
         else:
             if age <= 13:
-                print(colored('You are underaged. Seek parental guidance.','red',attrs=['bold']))
+                slow_typing('You are underaged. Seek parental guidance.', 50, 'red')
                 display_image('https://www.imda.gov.sg/-/media/Imda/Images/Content/Regulation-Licensing-and-Consultations/Content-Standards-and-classification/Classification-Rating/PG13-Rating.png?la=en&hash=FDB0D0A4021A703C98A3E791D1EA3E9494BB70A7')
                 end_game()
+            print(age)
             return age
 
 def display_partners(partners: []):
-    print('Now let introduce your 3 lovely partners...')
+    slow_typing('Now let introduce your 3 lovely partners...', 20, 'green')
     print("----------------------------------------------------------------")
     
     partner_no=1
@@ -149,7 +162,7 @@ def main():
 
     ###### START OF SECTION 1: GAME CUSTOMIZATION ######
     print()
-    print(colored('Welcome to Dating Simulator 2020','cyan',attrs = ['bold']))
+    slow_typing('Welcome to Dating Simulator 2020',10,'cyan')
     print()
     current_player.name = string_validation(game_config.player_profile_questions["name"])
     print()
@@ -160,7 +173,7 @@ def main():
     current_player.partner_gender = choose_options((game_config.player_profile_questions["partner_gender"]))
 
     print()
-    print(f"Hi {current_player.name}, let's move on to some other questions regarding your dating preferences")
+    slow_typing(f"Hi {current_player.name}, let's move on to some other questions regarding your dating preferences\n", 20, 'green')
     print("Make your choices by answering 1 or 2.")
     print()
     
@@ -176,7 +189,7 @@ def main():
     chosen_partner_no= int(choose_options(partner_choices))
     chosen_partner: partner() = partners[chosen_partner_no-1]
     print()
-    print(f"You have chosen {chosen_partner.name}! \nAre you ready to unlock this new journey in knowing {chosen_partner.name}?\n")
+    slow_typing(f"You have chosen {chosen_partner.name}! \nAre you ready to unlock this new journey in knowing {chosen_partner.name}?\n", 20, 'green')
     print("Press [ENTER] to continue!")
     input("")
 
@@ -191,7 +204,7 @@ def main():
         print(f"Start of Scenario {scenario.id}\n")
         mcq_id = 1
         while mcq_id <= len(scenario.mcqs):
-            print(scenario.mcqs[mcq_id-1].question.replace("_br_","\n"))
+            slow_typing(scenario.mcqs[mcq_id-1].question.replace("_br_","\n"), 10, 'blue')
             print()
             option_ids=[]
             for option in scenario.mcqs[mcq_id-1].options:
@@ -221,7 +234,7 @@ def main():
             else:
                 mcq_id += 1
             
-        print(f"End of Scenario {scenario.id}\n\n")
+        slow_typing(f"End of Scenario {scenario.id}\n\n", 10 , 'green')
 
         #Check if score is sufficient for player to proceed
         if current_player.score > 1 and scenario.id == len(storyline.scenarios):
@@ -235,14 +248,14 @@ def main():
             pass
         elif current_player.score > 1:
             #display round win scene
-            print(f"Have fun on your date with {chosen_partner.name} tomorrow! ")
+            slow_typing(f"Have fun on your date with {chosen_partner.name} tomorrow! ", 20 , 'green')
             display_image('https://upload.wikimedia.org/wikipedia/commons/e/e6/Finger_heart.png')
             print()
             pass
         else:
             #display lose scene
-            print("She ghosted you")
-            print("Game over bro")
+            slow_typing("She ghosted you\n", 5 , 'red')
+            slow_typing("Game over bro\n", 5, 'red')
             display_image('https://upload.wikimedia.org/wikipedia/commons/thumb/b/bb/Broken_heart.svg/166px-Broken_heart.svg.png')
             print()
             break
