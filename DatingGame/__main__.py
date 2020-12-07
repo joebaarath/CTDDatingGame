@@ -5,9 +5,9 @@ from data_config import *
 from game_class import *
 import time
 from colorama import init
-from termcolor import colored
+#from termcolor import colored
 
-#init()
+init()
 
 def choose_color(value):
     sys.stdout.write(data_config().colors['off'])
@@ -32,7 +32,7 @@ def choose_options(qns_and_options):
             message += options[i]
             if(i < len(options)-1):
                 message += ', '
-        slow_typing( message + '\nPlease try again.', 20 , 'red')
+        slow_typing( message + '\nPlease try again.\n', 20 , 'red')
         option = choose_options(qns_and_options)
     return option
 
