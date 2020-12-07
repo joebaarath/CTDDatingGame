@@ -266,13 +266,9 @@ def main():
                     # Create Tuple
                     jump_to_scenario = (selected_option.jump_to_scenario_id,selected_option.jump_to_scenario_path)
 
-<<<<<<< Updated upstream
-        print()
-        slow_typing(f"End of Scenario {scenario.id}\n\n", 10 , 'green')
-=======
-            
+
         slow_typing(f"\nEnd of Scenario {scenario.id}\n\n", 10 , 'yellow')
->>>>>>> Stashed changes
+
         
         #####TEMP
         slow_typing(("Current Score of player:" + str(current_player.score)+ '\n'),25, 'magenta')
