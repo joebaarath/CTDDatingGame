@@ -233,8 +233,8 @@ def main():
             option_ids=[]
             for option in scenario.mcqs[mcq_id-1].options:
                 ############TEMP CHEAT SHEET
-                print(f"[{option.id}] {option.option} [ANSWER:{option.personality_type in chosen_partner.personality_types}|{option.personality_type}][JUMP TO SCENARIO:{option.jump_to_scenario_id}{option.jump_to_scenario_path}]" )
-                #print(f"[{option.id}] {option.option}")
+                #print(f"[{option.id}] {option.option} [ANSWER:{option.personality_type in chosen_partner.personality_types}|{option.personality_type}][JUMP TO SCENARIO:{option.jump_to_scenario_id}{option.jump_to_scenario_path}]" )
+                print(f"[{option.id}] {option.option}")
                 option_ids.append(option.id)
             print()
             choice=int(choose_options(['Reply: ',option_ids]))
