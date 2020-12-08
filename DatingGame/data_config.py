@@ -36,6 +36,10 @@ class data_config():
         self.lose_scenes =  [
                                 "Unfortunately, _partner_ is not interested in hanging with you anymore… Game Over",
                                 "Rejection hurts, and you hurt _partner_! There are no second chances in life... Game over",
+                                "_partner_: Sorry.. but I'm already married. K THX BYE_br_Ouch.. Game over",
+                                "_partner_: Sorry.. You're not really my type.._br_Game over",
+                                "_partner_: It's not you, it's me.. Actually.. It's not me. It's you!_br_Game over",
+                                "After trying to contact _partner_ for several days, you realized _partner_ has blocked you._br_Too bad.. Game Over.",
                             ]
 
         self.win_scenes =  {
