@@ -135,7 +135,7 @@
                                                     "option": "Do you want both of us to play the piano together??",
                                                     "personality_type": "Introvert",
                                                     "response_positive": "_partner_ Smiles widely_br__partner_: I love musical instruments, especially the soothing ones. Let's go ahead!_br__partner_ heads you to the piano._br__partner_ holds your hand (expresses interest in you subtly) and teaches you to play calm, soothing and romantic music._br_The whole atmosphere is quite romantic._br_Both of you enjoy the entire exercise and realise you have great chemistry to take the relationship forward.",
-                                                    "response_negative": "_partner_: (Hesitates) Oh alright, I didn't expect this_br_Both of you sit on the chair and try to play the piano. Evidently, _partner_ is bored and there are moments of awkward silence. Both of you don't seem to be enjoying the activity._br_Unfortunately, there is no chemistry._br_Date is cut short._br_Date over.",
+                                                    "response_negative": "_partner_: (Hesitates) Oh alright, I didn't expect this_br_Both of you sit on the chair and try to play the piano._br_Evidently, _partner_ is bored and there are moments of awkward silence._br_Both of you don't seem to be enjoying the activity._br_Unfortunately, there is no chemistry._br_Date is cut short._br_Date over.",
                                                     "jump_to_mcq_id": null,
                                                     "jump_to_scenario_id": 3,
                                                     "jump_to_scenario_path": null
