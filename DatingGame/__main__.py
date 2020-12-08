@@ -27,7 +27,7 @@ def choose_options(qns_and_options):
     option = ""
     option = str(input(question)).upper()
     if option not in options:
-        message = f'"{option}" is an invalid option! options are '
+        message = f'"{option}" is an invalid option! Options are '
         for i in range(len(options)):
             message += options[i]
             if(i < len(options)-1):
@@ -110,22 +110,26 @@ def string_validation(question):
             # quit
             sys.exit(0)
         except:
-            print('Please enter a valid name')
-            string_validation(question)
+            slow_typing('Please enter a valid name', 50, 'red')
+            print()
+            print()
+            return string_validation(question)
 
 def age_validation(question):
         try:
             age = int(input(question))
-        except KeyboardInterrupt: #purpose?
+        except KeyboardInterrupt:
             # quit
             sys.exit(0)
         except:
-            print('Please enter a valid number')
-            #print(age) bug
-            age_validation(question)
+            slow_typing('Please enter a valid number', 50, 'red')
+            print()
+            print()
+            return age_validation(question)
         else:
-            if age <= 13:
+            if age < 13:
                 slow_typing('You are underaged. Seek parental guidance.', 50, 'red')
+                print()
                 display_image('PG13 Rating.png')
                 end_game()
             print(age)
