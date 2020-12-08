@@ -37,7 +37,7 @@ def choose_options(qns_and_options):
     return option
 
 def display_image(url):
-     img = plt.imread(url)
+     img = plt.imread("images\\" + url)
      plt.imshow(img)
      plt.axis("off")
      plt.show()
@@ -126,7 +126,7 @@ def age_validation(question):
         else:
             if age <= 13:
                 slow_typing('You are underaged. Seek parental guidance.', 50, 'red')
-                display_image('https://www.imda.gov.sg/-/media/Imda/Images/Content/Regulation-Licensing-and-Consultations/Content-Standards-and-classification/Classification-Rating/PG13-Rating.png?la=en&hash=FDB0D0A4021A703C98A3E791D1EA3E9494BB70A7')
+                display_image('PG13 Rating.png')
                 end_game()
             print(age)
             return age
@@ -233,8 +233,8 @@ def main():
             option_ids=[]
             for option in scenario.mcqs[mcq_id-1].options:
                 ############TEMP CHEAT SHEET
-                # print(f"[{option.id}] {option.option} [ANSWER:{option.personality_type in chosen_partner.personality_types}][JUMP TO SCENARIO:{option.jump_to_scenario_id}{option.jump_to_scenario_path}]" )
-                print(f"[{option.id}] {option.option}")
+                print(f"[{option.id}] {option.option} [ANSWER:{option.personality_type in chosen_partner.personality_types}|{option.personality_type}][JUMP TO SCENARIO:{option.jump_to_scenario_id}{option.jump_to_scenario_path}]" )
+                #print(f"[{option.id}] {option.option}")
                 option_ids.append(option.id)
             print()
             choice=int(choose_options(['Reply: ',option_ids]))
@@ -243,7 +243,7 @@ def main():
             #flatten list
             list_of_persoanlities = [item for sublist in game_config.list_of_all_types for item in sublist]
             # 1) Does personality belong to special case (Plus, Minus, Bonus)
-            if(selected_option.personality_type == "Plus" or selected_option.personality_type == "Minus" or selected_option.personality_type == "Bonus"):
+            if(selected_option.personality_type == "Plus" or selected_option.personality_type == "Minus" or selected_option.personality_type == "Zero" or selected_option.personality_type == "Bonus"):
                 if selected_option.personality_type == "Plus" :
                     current_player.score += 1
                     if(selected_option.response_positive != ""):
@@ -254,6 +254,11 @@ def main():
                     if(selected_option.response_negative != ""):
                         print()
                         slow_typing(selected_option.response_negative.replace("_br_","\n"), 10, 'blue')
+                elif selected_option.personality_type == "Zero" :
+                    current_player.score += 0
+                    if(selected_option.response_positive != ""):
+                        print()
+                        slow_typing(selected_option.response_positive.replace("_br_","\n"), 10, 'blue')
                 # elif selected_option.personality_type == "Bonus" :
                 #     current_player.score += 1
                 #     if(selected_option.response_positive != ""):
@@ -294,25 +299,27 @@ def main():
 
         if current_player.score > 0 and counter == len(storyline.scenarios):
             #display final win scene
+            print()
             slow_typing((game_config.win_scenes[scenario.id]).replace("_br_","\n").replace("_partner_",chosen_partner.name).replace("_player_",current_player.name),10, 'yellow')
+            print()
             print()
             slow_typing(f"Congrat you have won the game!\n", 15, 'cyan')
             slow_typing(f"Hope you had funnn!\n", 15, 'cyan')
-            display_image('http://www.pngall.com/wp-content/uploads/4/Golden-Cup.png')
+            display_image('Golden-Cup.png')
             print()
         #Check if score is sufficient for player to proceed
         elif current_player.score >= 0:
             #display round win scene
             print()
             slow_typing((game_config.win_scenes[scenario.id]).replace("_br_","\n").replace("_partner_",chosen_partner.name).replace("_player_",current_player.name), 20 , 'green')
-            display_image('https://upload.wikimedia.org/wikipedia/commons/e/e6/Finger_heart.png')
+            display_image('Finger_heart.png')
             print()
             print()
         else:
             #display lose scene
             print()
             slow_typing(random.choice(game_config.lose_scenes).replace("_br_","\n").replace("_partner_",chosen_partner.name).replace("_player_",current_player.name), 5 , 'red')
-            display_image('https://upload.wikimedia.org/wikipedia/commons/thumb/b/bb/Broken_heart.svg/166px-Broken_heart.svg.png')
+            display_image('166px-Broken_heart.svg.png')
             print()
             print()
             break

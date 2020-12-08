@@ -182,9 +182,9 @@
                                                 {
                                                     "id": 1,
                                                     "option": "Ah... I don't really need any food...",
-                                                    "personality_type": "Introvert",
-                                                    "response_positive": "",
-                                                    "response_negative": "*Awkward silence*",
+                                                    "personality_type": "Zero",
+                                                    "response_positive": "*Awkward silence*",
+                                                    "response_negative": "",
                                                     "jump_to_mcq_id": null,
                                                     "jump_to_scenario_id": null,
                                                     "jump_to_scenario_path": null
@@ -192,8 +192,8 @@
                                                 {
                                                     "id": 2,
                                                     "option": "Sure! I'm up for a cup of bubble tea!",
-                                                    "personality_type": "Extrovert",
-                                                    "response_positive": "_partner_: Wah, I was also thinking about that.... we are definitely a match_br__partner_: _player_ sends a wink in your direction_br_On the way to the get your snacks, you and _player_ hit off really well!",
+                                                    "personality_type": "Plus",
+                                                    "response_positive": "_partner_: Wah, I was also thinking about that.... We are definitely a match_br__partner_ sends a wink in your direction_br_On the way to the get your snacks, you and _partner_ hit off really well!",
                                                     "response_negative": "",
                                                     "jump_to_mcq_id": null,
                                                     "jump_to_scenario_id": null,
